@@ -1,0 +1,32 @@
+---
+title: "Sample Rmd"
+author: "Oren Zusman"
+date: "16/04/2016"
+output: html_document
+bibliography: my_library.bib
+csl: vancouver.csl
+---
+```{r loaders, include=FALSE, results='hide', messages=FALSE, warnings=FALSE, echo=FALSE}
+# r code chunk for loading and preparing data. No presentation.
+
+```
+
+one study[@urban_vitro_2010] found something. And another[@mouloudi_bloodstream_2014] found something else and yet [@paul_acinetobacter_2005] found another thing. great la l 
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+One study 
+
+```{r}
+summary(cars)
+```
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## References ##
