@@ -1,0 +1,11 @@
+Package: Zmisc
+Title: misc utility function I use in R analysis.
+Version: 0.0.0.9000
+Authors@R: person("Oren", "Zusman", email = "orenzusman@gmail.com", role = c("aut", "cre"))
+Description: Same as title
+Depends:
+    R (>= 3.3.1)
+License: BSD
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
