@@ -2,10 +2,10 @@
 % Please edit documentation in R/utility.R
 \name{summ}
 \alias{summ}
-\title{defined for a two level factor}
+\title{defined for a two level factor, will omit the rest.}
 \usage{
-summ(v)
+summ(v, pos = "yes", neg = "no")
 }
 \description{
-defined for a two level factor
+defined for a two level factor, will omit the rest.
 }

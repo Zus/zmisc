@@ -7,6 +7,7 @@ bibliography: my_library.bib
 csl: vancouver.csl
 ---
 ```{r loaders, include=FALSE, results='hide', messages=FALSE, warnings=FALSE, echo=FALSE}
+# this file is a scaffold for writing Rmd's with citations
 # r code chunk for loading and preparing data. No presentation.
 
 ```

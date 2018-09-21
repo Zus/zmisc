@@ -1,4 +1,4 @@
-# create a 3-group class. receives a data frame with obs prob columns
+#' create a 3-group class. receives a data frame with obs prob columns
 create_pred_table <- function(DF,thl,thh, levs = c("low","mid","high")) {
     DF <- as.data.table(DF)
     DF[prob<thl, cl := levs[1]]
@@ -8,7 +8,14 @@ create_pred_table <- function(DF,thl,thh, levs = c("low","mid","high")) {
     DF
 }
 
-@export
+#' just summary after factorization
+#' @export
+summaryf <- function(vec) {
+    summary(factor(vec))
+}
+
+#' summary for prediction table
+#' @export
 summtab <- function(pred_table) {
     ta <- addmargins(table(pred_table[,c(1,3)]))
     ta <- ta[,c(2,3,1,4)]
@@ -37,7 +44,7 @@ get_col_perc <- function (v) {
     l
 }
 
-#'
+#' compare two proportions
 compare_prop <- function(n1,prop1,n2,prop2) {
     prop1 = prop1/100
     prop2 = prop2/100
@@ -57,7 +64,7 @@ comp_col <- function (t1,col1,col2) {
     ch
 }
 
-#' 
+#' get fit from caret and extract ppv/npv
 get_ppv_npv_res <- function (fit) {
         res <- fit$resampledCM
         pr <- as.data.table(fit$pred)
@@ -218,27 +225,43 @@ iqr <- function(x,na.rm=F) {
 
 #' take two factors and arrange in a proportion table
 #' @export
-table_by <- function (fac1,fac2,dat) {
-    ta <- table(dat[[fac1]], dat[[fac2]])
-    ta <- ta[,!(colnames(ta) %in% "")]
-    cbind(ta,total = margin.table(ta,1), percent_yes = round(prop.table(ta,1)[,"YES"],3))
+table_by <- function(fac1,fac2,dat,yes="Yes") {
+     dat <- as.data.frame(dat)
+     ta <- table(dat[[fac1]], dat[[fac2]])
+     ta <- ta[, !(colnames(ta) %in% "")]
+     cbind(ta, total = margin.table(ta, 1), percent_yes = round(prop.table(ta, 
+         1)[, yes], 3))
+}
+
+#' similar to table_by but accomodates multilevel factors.
+#' @export
+table_prop <- function(fac1, fac2,dat) {
+    tab <- table(dat[[fac1]],dat[[fac2]])
+    pr <- prop.table(tab,1)[,2]
+    tab <- as.data.frame.matrix(tab)
+    tab$percent <- round(pr,2)
+    tab
 }
 
 #' take a 2-level vector and code to numeric
 #' @export
-yesno_to_num <- function (v) {
-    v[v=="YES" & !is.na(v)] <- 1
-    v[v=="NO" & !is.na(v)] <- 0
+yesno_to_num <- function (v,yes = "Yes", no ="No") {
+    v[v==yes & !is.na(v)] <- 1
+    v[v==no & !is.na(v)] <- 0
     as.integer(v)
 }
 
-num_to_yesno <- function (v) {
-    v[v==1 & !is.na(v)] <- "YES"
-    v[v==0 & !is.na(v)] <- "NO"
+#' turn a two level num vector to yes/no
+#' @export
+num_to_yesno <- function (v, yes = "Yes", no = "No") {
+    v[v==1 & !is.na(v)] <- yes
+    v[v==0 & !is.na(v)] <- no
     factor(as.character(v))
 
 }
 
+#' turn a factor back ti numeric
+#' @export
 asnf <- function (v) {
     as.numeric(levels(v))[v]
 }

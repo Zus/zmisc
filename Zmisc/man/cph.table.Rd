@@ -6,6 +6,12 @@
 \usage{
 cph.table(x, conf.int = 0.95, digits = 4, eps = 0.001)
 }
+\arguments{
+\item{x}{object create by glm() or coxph()}
+}
+\value{
+pretty printed talbe
+}
 \description{
 Print only the cox table from cph
 }
